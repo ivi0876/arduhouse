@@ -34,9 +34,9 @@ for(int Npin=11; Npin>13; Npin++){
   servo.attach(7);
 
   
-  lcd.print("Temperatura:"); // temperature
+  lcd.print("Temperature:"); // temperature
   lcd.setCursor(5,2);
-  lcd.print("Centigrados"); // centigrade
+  lcd.print("Centigrades"); // centigrade
   
 }
 
@@ -54,13 +54,13 @@ void sensor_light(){
   int sensorLight = analogRead(A0);
   delay(250);
   int porcentaje = map(sensorLuz,0,1023,0,100);
-  Serial.println("El valor de la luz es: " + porcentaje +"%");
+  Serial.println("The value of light is: " + porcentaje +"%");
 
   if(sensorLight<80){
-    digitalWrite(luces,HIGH);
+    digitalWrite(lights_ldr,HIGH);
   }
   else{
-    digitalWrite(luces,LOW);
+    digitalWrite(lights_ldr,LOW);
   }
   delay(250);
 }
@@ -70,12 +70,12 @@ void sensor_light(){
 void sensor_temperature(){
 //operation to calculate the values ​​in centigrade
   int grados = (analogRead(A1)-104)/2;
-  Serial.println("La temperatura es de: " + grados + "Cº");
+  Serial.println("The temperature is: " + grados + "Cº");
 
   if(grados<15){
-    digitalWrite(13,HIGH); //Azul
-    digitalWrite(12,LOW);  //Verde
-    digitalWrite(11,LOW);  //Rojo
+    digitalWrite(13,HIGH); //led blue
+    digitalWrite(12,LOW);  //led green
+    digitalWrite(11,LOW);  //led Red
   }
   else if(grados>19 && grados<25){
   
@@ -98,7 +98,7 @@ void sensor_temperature(){
 
 
 void sensor_ultrasonidos(){
-  long duracion, ditancia;
+  long duracion, ditancie;
   digitalWrite(trigger,LOW);
   delayMicroseconds(2);
   digitalWrite(trigger,HIGH);
@@ -106,19 +106,19 @@ void sensor_ultrasonidos(){
   digitalWrite(trigger,LOW);
   duracion=pulseIn(echo,HIGH);
   //operation to calculate the value in centimeters
-  distancia = (duracion/2) /29.1;
+  distance = (duracion/2) /29.1;
 
-  if(distancia < 9){
+  if(distance < 9){
     Serial.println("==================================);"
-    Serial.println("Garaje abierto");
+    Serial.println("Garage open");
     servo.write(0);
     servo1.write(150);
-    digitalWrite(luz_garaje,HIGH);
+    digitalWrite(light_garage,HIGH);
   }
-  else if(distancia > 9){
+  else if(distance > 9){
     Serial.println("==================================");
-    Serial.println("Garaje cerrado");
+    Serial.println("Garage close");
   }
   Serial.println("=====================================");
-  Serial.println(distancia + " cm");
+  Serial.println(distance + " cm");
 }
