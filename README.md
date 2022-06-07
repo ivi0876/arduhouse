@@ -38,3 +38,10 @@ licencia
 ## Next step
 
 Apply API server with django or flask. connect with esp32
+
+The house will be automated through several independent arduinos. Each arduino will connect to a centralized API to exchange different info.
+
+Regarding the code, we'll divide each functional piece in different folders as:
+LightSensor/
+ParkingDoor/
+TemperatureHumiditySensor/
